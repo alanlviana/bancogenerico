@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Iniciar como </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+    <a href="#">Interface de Funcionário</a>
+    <a href="#">Interface de Cliente</a>
+    
+ 	<table>
+       <tr>
+       		<td>ID</td>
+       		<td>Identificação</td>
+       		<td>Endereço</td>
+       </tr>
+       
+       <tr th:each="item : ${caixas}">
+       		<td  th:text="${item.id}"></td>
+       		<td  th:text="${item.identificacao}"></td>
+       		<td  th:text="${item.endereco}"></td>
+       		
+       </tr>
+    </table>    
+    
+</body>
+</html>

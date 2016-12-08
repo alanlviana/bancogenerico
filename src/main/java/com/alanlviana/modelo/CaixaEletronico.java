@@ -1,12 +1,16 @@
 package com.alanlviana.modelo;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import javax.management.RuntimeErrorException;
+
 public class CaixaEletronico {
 
-	public CaixaEletronico(String identificacao, String endereco) {
+	public CaixaEletronico(long id,String identificacao, String endereco) {
 		super();
+		this.id = id;
 		this.identificacao = identificacao;
 		this.endereco = endereco;
 	}
@@ -14,7 +18,7 @@ public class CaixaEletronico {
 	private long id;
 	private String identificacao;
 	private String endereco;
-	private List<Cedula> cedulas = Collections.emptyList();
+	private List<Cedula> cedulas = new ArrayList<>();
 	
 	public long getId() {
 		return id;
@@ -41,6 +45,27 @@ public class CaixaEletronico {
 	
 	public void adicionarCedula(Cedula cedula){
 		cedulas.add(cedula);
+	}
+	public void saque(float valor) {
+			
+		if (valor <= 0) {
+			throw new IllegalArgumentException("O valor do saque deve ser positivo.");
+		}
+		
+		if (valor > this.getSaldo()) {
+			throw new RuntimeException("Quantia não disponível.");
+		}
+		
+		
+	}
+	public float getSaldo() {
+		float saldo = 0;
+		
+		for (Cedula cedula : cedulas){
+			saldo += cedula.getValor();
+		}
+		
+		return saldo;
 	}
 
 	
